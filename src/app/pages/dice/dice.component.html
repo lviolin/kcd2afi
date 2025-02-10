@@ -1,0 +1,163 @@
+<div class="page">
+  <div class="section">
+    <h1>
+      My Dice
+      <a [routerLink]="['/dice', setId]"><mat-icon>link</mat-icon></a>
+    </h1>
+    <table mat-table [dataSource]="diceSet">
+      <ng-container matColumnDef="act">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let item">
+          <button
+            mat-raised-button
+            color="warn"
+            (click)="removeDieFromSet(item.id)"
+          >
+            x
+          </button>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Die Name</th>
+        <td mat-cell *matCellDef="let item">{{ item.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="w1Perc" matTooltip="123">
+        <th mat-header-cell *matHeaderCellDef>P%1</th>
+        <td mat-cell *matCellDef="let item">
+          <div>
+            {{ item.w1Perc | number : '1.2-2' }}
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="w2Perc">
+        <th mat-header-cell *matHeaderCellDef>P%2</th>
+        <td mat-cell *matCellDef="let item">
+          {{ item.w2Perc | number : '1.2-2' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="w3Perc">
+        <th mat-header-cell *matHeaderCellDef>P%3</th>
+        <td mat-cell *matCellDef="let item">
+          {{ item.w3Perc | number : '1.2-2' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="w4Perc">
+        <th mat-header-cell *matHeaderCellDef>P%4</th>
+        <td mat-cell *matCellDef="let item">
+          {{ item.w4Perc | number : '1.2-2' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="w5Perc">
+        <th mat-header-cell *matHeaderCellDef>P%5</th>
+        <td mat-cell *matCellDef="let item">
+          {{ item.w5Perc | number : '1.2-2' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="w6Perc">
+        <th mat-header-cell *matHeaderCellDef>P%6</th>
+        <td mat-cell *matCellDef="let item">
+          {{ item.w6Perc | number : '1.2-2' }}
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="cols; sticky: true"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: cols"
+        [ngClass]="{
+          inactive: !row.isActive
+        }"
+      ></tr>
+    </table>
+
+    <hr />
+
+    <h1>Interesting Probabities</h1>
+    <div class="facts">
+      <app-dice-fact
+        *ngFor="let key of setFacts.keys()"
+        [label]="key"
+        [prob]="setFacts.get(key) ?? 0"
+      ></app-dice-fact>
+    </div>
+
+    <hr class="sm-only" />
+  </div>
+
+  <div class="section">
+    <h1>All Dice</h1>
+    <div class="table-wrapper">
+      <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="act">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+          <td mat-cell *matCellDef="let item">
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="addDieToSet(item.id)"
+            >
+              +
+            </button>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Die Name</th>
+          <td mat-cell *matCellDef="let item">{{ item.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="w1Perc" matTooltip="123">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>P%1</th>
+          <td mat-cell *matCellDef="let item">
+            <div>
+              {{ item.w1Perc | number : '1.2-2' }}
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="w2Perc">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>P%2</th>
+          <td mat-cell *matCellDef="let item">
+            {{ item.w2Perc | number : '1.2-2' }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="w3Perc">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>P%3</th>
+          <td mat-cell *matCellDef="let item">
+            {{ item.w3Perc | number : '1.2-2' }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="w4Perc">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>P%4</th>
+          <td mat-cell *matCellDef="let item">
+            {{ item.w4Perc | number : '1.2-2' }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="w5Perc">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>P%5</th>
+          <td mat-cell *matCellDef="let item">
+            {{ item.w5Perc | number : '1.2-2' }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="w6Perc">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>P%6</th>
+          <td mat-cell *matCellDef="let item">
+            {{ item.w6Perc | number : '1.2-2' }}
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="cols; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: cols"></tr>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<div
+  class="fact"
+  [ngClass]="{
+    great: prob > 0.85,
+    good: prob > 0.5,
+    nice: prob > 0.4,
+    med: prob > 0.3,
+    bad: prob <= 0.3
+  }"
+>
+  <label>{{ label }}</label>
+  <div class="value">{{ prob * 100 | number : '1.2-2' }}<span>%</span></div>
+</div>

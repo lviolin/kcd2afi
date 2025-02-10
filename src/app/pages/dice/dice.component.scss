@@ -1,0 +1,30 @@
+@import '/src/styles/include-media';
+
+.facts {
+  display: flex;
+  gap: 26px;
+  flex-wrap: wrap;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  .section {
+  }
+}
+
+@include media('>desktop') {
+  .page {
+    flex-direction: row;
+    gap: 20px;
+    .section {
+      flex: 1;
+      height: 100%;
+    }
+
+    .table-wrapper {
+      height: calc(100vh - 150px);
+      overflow-y: auto;
+    }
+  }
+}

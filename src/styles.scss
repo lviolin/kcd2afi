@@ -1,0 +1,54 @@
+@import './styles/theme';
+@import './styles/include-media';
+
+html,
+body {
+  min-height: 100vh;
+  height: auto;
+  margin: 0;
+}
+
+.page-content {
+  padding: 16px;
+  min-width: 710px;
+  padding-bottom: 0;
+}
+
+.mat-mdc-table {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+
+  .mdc-data-table__header-row {
+    height: 32px;
+
+    .mat-mdc-header-cell {
+      background-color: #444 !important;
+
+      &:first-child {
+        border-top-left-radius: 8px;
+      }
+      &:last-child {
+        border-top-right-radius: 8px;
+      }
+    }
+  }
+
+  .mat-mdc-cell {
+    button {
+      height: 24px;
+      width: 24px;
+      min-width: 0;
+    }
+  }
+}
+
+.mat-column-add {
+  width: 30px;
+  padding-right: 0 !important;
+}
+
+@include media('>desktop') {
+  .sm-only {
+    display: none;
+  }
+}
